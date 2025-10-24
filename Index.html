@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- link the css file to html file -->
+<link rel="stylesheet" href="style.css">
+    <title>to-do list</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header" id="list">
+            <h1>To-do List</h1>
+            <input type="text" name="" id="input" placeholder="Add item...">
+            <span onclick="newItem();" class="btn">Add</span>
+        </div>
+        <!-- list div -->
+        <ul id="items">
+            <li>Math assignment</li>
+            <li>English homework</li>
+            <li class="checked">Make breakfast</li>
+            <li>Call to Mom</li>
+            <li>Prepare for presentation</li>
+        </ul>
+    </div>
+    <!-- link the javascript file to html file -->
+    <script src="script.js"></script>
+</body>
+</html>
+let Listbtn= document.getElementsByTagName("LI");
+var i;
+for(i = 0; i<Listbtn.length; i++){
+    let span = document.createElement("SPAN")
+    let text = document.createTextNode("\u00D7")
+    span.className = "close";
+    span.appendChild(text)
+    Listbtn[i].appendChild(span)
+}
+let close = document.getElementsByClassName("close");
+var i;
+for(i=0; i < close.length; i++){
+    close[i].onclick = function(){
+        let div = this.parentElement;
+        div.style.display = "none";
+
+    }
+ }
+ let btn = document.querySelector('ul');
+ btn.addEventListener('click', function(ev){
+    if(ev.target.tagName === 'LI'){
+        ev.target.classList.toggle('checked');
+
+    }
+ },false);
+ 
+function newItem(){
+    let li = document.createElement("li")
+    let inputValue = document.getElementById("input").value;
+    let t = document.createTextNode(inputValue);
+    li.appendChild(t);
+    if(inputValue ===''){
+        alert("please write something!")
+
+    }else{
+        document.getElementById("items").appendChild(li)
+    }
+    document.getElementById("input").value = "";
+    let span = document.createElement("SPAN")
+    let text = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(text);
+    li.appendChild(span);
+
+    for(i = 0; i <close.length; i++){
+        close[i].onclick = function(){
+            let div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
+}
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #a5b1c2;
+}
+.container{
+    width: 70%;
+    max-width: 400px;
+    background-color: #1e272e;
+    color: #fff;
+    margin: 10px auto 0; 
+    border-radius: 10px;
+    padding: 15px 10px;
+    text-align: left;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+}
+h1{
+    margin-bottom: 20px;
+    color: #18dcff;
+}
+ul{
+    margin: 0;
+    padding: 0;
+}
+ul li{
+    position: relative;
+    cursor: pointer;
+    padding: 12px 7px 12px 35px;
+    list-style-type: none;
+    font-size: 18px;
+    transform: 0.3s;
+    -webkit-user-select:none;
+    -moz-user-select: none;
+    -ms-user-select:none;
+    user-select: none;
+}
+ul li:hover{
+    background: #636e72;
+}
+ul li.checked{
+    color:#ff7675;
+    text-decoration: line-through;
+}
+ul li.checked::before{
+content: '';
+position: absolute;
+border-color: #fff;
+border-style: solid;
+border-width: 0 2px 2px 0;
+top: 10px;
+left: 15px;
+transform: rotate(45deg);
+height: 15px;
+width: 8px;
+}
+.close{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+.close:hover{
+    background-color: #18dcff;
+    color: white;
+}
+.header{
+    padding: 30px 40px ;
+    color: #fff;
+    text-align: center;
+}
+.header::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+input{
+    margin: 0;
+    border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 80%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+    outline: none;
+}
+.btn{
+    padding: 10px;
+    width: 20%;
+    background: #ddd;
+    color: #555;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.btn:hover{
+    background-color: #18dcff;
+}
